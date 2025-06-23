@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Mystic Bar & Cafe - Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8B4513;  /* SaddleBrown */
+            --secondary: #A0522D;  /* Sienna */
+            --accent: #D2691E;  /* Chocolate */
+            --light: #FFF8DC;  /* Cornsilk */
+            --dark: #5D4037;  /* Dark Brown */
+            --highlight: #FFD700;  /* Gold */
+            --text: #3E2723;  /* Dark Brown */
+            --bg: #F5F5F5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 3px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--highlight), var(--accent), var(--primary));
+            animation: rainbow 8s linear infinite;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 2rem;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+            position: relative;
+            animation: fadeInLeft 0.8s ease-out;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: var(--highlight);
+            animation: expand 1.5s ease-out;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+            animation: fadeInRight 0.8s ease-out;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .menu-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .menu-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-left: 5px solid var(--highlight);
+        }
+        
+        ul.menu-items {
+            list-style: none;
+        }
+        
+        ul.menu-items li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(139, 69, 19, 0.3);
+            transition: all 0.2s ease;
+            animation: fadeIn 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        ul.menu-items li:hover {
+            background: rgba(210, 105, 30, 0.1);
+            transform: translateX(5px);
+        }
+        
+        ul.menu-items li span:first-child {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .price {
+            font-weight: 700;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .price::before {
+            content: 'Rs. ';
+            font-size: 0.9em;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        table tr {
+            transition: all 0.2s ease;
+        }
+        
+        table tr:hover {
+            background: rgba(210, 105, 30, 0.1);
+        }
+        
+        table td {
+            padding: 12px;
+            border-bottom: 1px dashed rgba(139, 69, 19, 0.3);
+        }
+        
+        table td:last-child {
+            font-weight: 700;
+            color: var(--primary);
+            text-align: right;
+        }
+        
+        .popular {
+            position: relative;
+        }
+        
+        .popular::after {
+            content: 'BESTSELLER';
+            position: absolute;
+            top: -8px;
+            right: -75px;
+            background: var(--highlight);
+            color: var(--dark);
+            padding: 3px 10px;
+            font-size: 0.7em;
+            font-weight: bold;
+            border-radius: 3px;
+            transform: rotate(15deg);
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-out;
+            border-top: 3px solid var(--primary);
+        }
+        
+        footer h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--highlight));
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from { 
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from { 
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        @keyframes expand {
+            from { width: 0; }
+            to { width: 100px; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .popular::after {
+                right: -70px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 30px 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .menu-section {
+                padding: 20px;
+            }
+            
+            .popular::after {
+                position: static;
+                display: inline-block;
+                margin-left: 10px;
+                transform: rotate(0);
+                top: auto;
+                right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress"></div>
+    
+    <div class="container">
+        <header>
+            <h1>THE MYSTIC BAR & CAFE</h1>
+            <p>~ Est. 2010 ~</p>
+        </header>
+        
+        <div class="menu-grid">
+            <!-- Left Column -->
+            <div class="left-col">
+                <!-- Burgers Section -->
+                <div class="menu-section">
+                    <h2>BURGERS</h2>
+                    <p class="note">All burgers come with complimentary fries</p>
+                    <ul class="menu-items">
+                        <li class="popular"><span>Mystinger</span> <span class="price">480</span></li>
+                        <li><span>Mystinger Mighty</span> <span class="price">600</span></li>
+                        <li class="popular"><span>Butter Mystinger</span> <span class="price">700</span></li>
+                        <li><span>Malai Cheese Fusion</span> <span class="price">600</span></li>
+                        <li><span>Cheesy Tikka Blaze</span> <span class="price">580</span></li>
+                        <li><span>Turkish Patty Grill</span> <span class="price">450</span></li>
+                        <li><span>Turkish Patty Deluxe</span> <span class="price">580</span></li>
+                        <li><span>Blazing Grill</span> <span class="price">480</span></li>
+                        <li><span>Blazing grill deluxe</span> <span class="price">620</span></li>
+                        <li class="popular"><span>Chicken pineapple El-Fugo</span> <span class="price">600</span></li>
+                        <li><span>Meat Maverick</span> <span class="price">480</span></li>
+                        <li><span>Meat Monster</span> <span class="price">620</span></li>
+                        <li><span>Beef Pineapple El-Fugo</span> <span class="price">630</span></li>
+                        <li class="popular"><span>Myshroom Beef</span> <span class="price">750</span></li>
+                        <li><span>Sausage smash duo</span> <span class="price">390</span></li>
+                        <li><span>Kebabish/Shami</span> <span class="price">550</span></li>
+                        <li><span>Kebabish Duo</span> <span class="price">320</span></li>
+                        <li><span>Kebabish Special</span> <span class="price">320</span></li>
+                        <li><span>Kebabish Duo Special</span> <span class="price">420</span></li>
+                        <li><span>Lapaita</span> <span class="price">250</span></li>
+                        <li><span>Lapaita Special</span> <span class="price">370</span></li>
+                    </ul>
+                </div>
+                <br>
+                
+                <!-- Sandwich Section -->
+                <div class="menu-section">
+                    <h3>SANDWICH</h3>
+                    <ul class="menu-items">
+                        <li><span>Mystic special</span> <span class="price">580</span></li>
+                        <li><span>Tikka twist</span> <span class="price">580</span></li>
+                        <li><span>Fire grilled</span> <span class="price">500</span></li>
+                        <li><span>Hemwich</span> <span class="price">480</span></li>
+                        <li><span>Club</span> <span class="price">450</span></li>
+                        <li><span>Kebabish</span> <span class="price">350</span></li>
+                    </ul>
+                </div>
+                <br>
+                
+                <!-- Wear Section -->
+                <div class="menu-section">
+                    <h3>WRAP</h3>
+                    <table>
+                        <tr>
+                            <td>Beef</td>
+                            <td class="price">530</td>
+                        </tr>
+                        <tr>
+                            <td>Fire grilled</td>
+                            <td class="price">480</td>
+                        </tr>
+                        <tr>
+                            <td>Mystinge</td>
+                            <td class="price">480</td>
+                        </tr>
+                        <tr>
+                            <td>Mystic Signature</td>
+                            <td class="price">600</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                
+                <!-- Shawarma Section -->
+                <div class="menu-section">
+                    <h3>SHAWARMA</h3>
+                    <ul class="menu-items">
+                        <li><span>Wakai Chota Shawarma</span> <span class="price">220</span></li>
+                        <li><span>Chicken</span> <span class="price">320</span></li>
+                        <li><span>Beef</span> <span class="price">420</span></li>
+                        <li><span>Zinger</span> <span class="price">380</span></li>
+                        <li><span>Tikka</span> <span class="price">400</span></li>
+                        <li class="popular"><span>Mystic Special Platter</span> <span class="price">650</span></li>
+                    </ul>
+                </div>
+                <br>
+                
+                <!-- Paratha Roll Section -->
+                <div class="menu-section">
+                    <h3>PARATHA ROLL</h3>
+                    <table>
+                        <tr>
+                            <td>Mystic Shapata Roll</td>
+                            <td class="price">520</td>
+                        </tr>
+                        <tr>
+                            <td>Malai Boti</td>
+                            <td class="price">480</td>
+                        </tr>
+                        <tr>
+                            <td>Zinger</td>
+                            <td class="price">480</td>
+                        </tr>
+                        <tr>
+                            <td>Liberty</td>
+                            <td class="price">480</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                
+                <!-- Fries Section -->
+                <div class="menu-section">
+                    <h3>FRIES</h3>
+                    <p class="note">Small / Large</p>
+                    <table>
+                        <tr>
+                            <td>Plain</td>
+                            <td class="price">250/350</td>
+                        </tr>
+                        <tr>
+                            <td>Masala</td>
+                            <td class="price">300/400</td>
+                        </tr>
+                        <tr>
+                            <td>Cheesy</td>
+                            <td class="price">450/600</td>
+                        </tr>
+                        <tr>
+                            <td>Loaded</td>
+                            <td class="price">500/650</td>
+                        </tr>
+                        <tr>
+                            <td>Garlic Mayo</td>
+                            <td class="price">380/500</td>
+                        </tr>
+                        <tr>
+                            <td>Fries With Nuggets</td>
+                            <td class="price">500</td>
+                        </tr>
+                        <tr>
+                            <td>Fries with wings</td>
+                            <td class="price">650</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                
+                <!-- Steaks Section -->
+                <div class="menu-section">
+                    <h3>STEAKS</h3>
+                    <table>
+                        <tr>
+                            <td>Italian Chicken Platter</td>
+                            <td class="price">750</td>
+                        </tr>
+                        <tr>
+                            <td>Jalapeño Chicken</td>
+                            <td class="price">1250</td>
+                        </tr>
+                        <tr>
+                            <td>Myshroomy Chicken</td>
+                            <td class="price">1250</td>
+                        </tr>
+                        <tr>
+                            <td>Jalapeño Beef</td>
+                            <td class="price">2200</td>
+                        </tr>
+                        <tr>
+                            <td>Myshroomy Beef</td>
+                            <td class="price">2200</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+            </div>
+            
+            <!-- Right Column -->
+            <div class="right-col">
+                <!-- Pibyani Section -->
+                <div class="menu-section">
+                    <h3>BIRYANI</h3>
+                    <table>
+                        <tr>
+                            <td>Regular</td>
+                            <td class="price">280</td>
+                        </tr>
+                        <tr>
+                            <td>Full</td>
+                            <td class="price">420</td>
+                        </tr>
+                        <tr>
+                            <td>Deal Regular (raita+salad)</td>
+                            <td class="price">380</td>
+                        </tr>
+                        <tr>
+                            <td>Deal Full (raita+salad)</td>
+                            <td class="price">480</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                
+                <!-- Salidi Mardi Section -->
+                <div class="menu-section">
+                    <h3>SAUDI MARDI</h3>
+                    <table>
+                        <tr>
+                            <td>Yakhni Pulao Single</td>
+                            <td class="price">300</td>
+                        </tr>
+                        <tr>
+                            <td>Yakhni Pulao Double</td>
+                            <td class="price">440</td>
+                        </tr>
+                        <tr>
+                            <td>Pulao Barbecue Platter</td>
+                            <td class="price">900/1500</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                
+                <!-- Shai Khoori Bar Section -->
+                <div class="menu-section">
+                    <h3>CHATKHOORI BAR</h3>
+                    <table>
+                        <tr>
+                            <td>Dahi Barray</td>
+                            <td class="price">250</td>
+                        </tr>
+                        <tr>
+                            <td>Pappari Chaat</td>
+                            <td class="price">300</td>
+                        </tr>
+                        <tr>
+                            <td>Channa Chaat</td>
+                            <td class="price">300</td>
+                        </tr>
+                        <tr>
+                            <td>Fruit Chaat</td>
+                            <td class="price">450</td>
+                        </tr>
+                        <tr>
+                            <td>Russian Salad</td>
+                            <td class="price">450</td>
+                        </tr>
+                        <tr>
+                            <td>Samosa Chaat</td>
+                            <td class="price">350</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                
+                <!-- Barbecue Section -->
+                <div class="menu-section">
+                    <h3>BARBECUE</h3>
+                    <p class="note">Half / Full</p>
+                    <table>
+                        <tr>
+                            <td>Tikka</td>
+                            <td class="price">800/1500</td>
+                        </tr>
+                        <tr>
+                            <td>Malai Boti</td>
+                            <td class="price">850/1600</td>
+                        </tr>
+                        <tr>
+                            <td>Beef kebab</td>
+                            <td class="price">450/850</td>
+                        </tr>
+                        <tr>
+                            <td>Chicken kebab</td>
+                            <td class="price">450/850</td>
+                        </tr>
+                        <tr>
+                            <td>Nablets</td>
+                            <td class="price">800/1500</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                
+                <!-- Tea Section -->
+                <div class="menu-section">
+                    <h3>TEA</h3>
+                    <table>
+                        <tr>
+                            <td>Karak</td>
+                            <td class="price">220</td>
+                        </tr>
+                        <tr>
+                            <td>Doodh pati</td>
+                            <td class="price">240</td>
+                        </tr>
+                        <tr>
+                            <td>Masala</td>
+                            <td class="price">250</td>
+                        </tr>
+                        <tr>
+                            <td>Cardimom</td>
+                            <td class="price">260</td>
+                        </tr>
+                        <tr>
+                            <td>Green tea</td>
+                            <td class="price">200</td>
+                        </tr>
+                        <tr>
+                            <td>Peshawri qehwa</td>
+                            <td class="price">250</td>
+                        </tr>
+                        <tr>
+                            <td>Sonf tea</td>
+                            <td class="price">250</td>
+                        </tr>
+                        <tr>
+                            <td>Ashraf al mashrubat</td>
+                            <td class="price">380</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                
+                <!-- Coffee Section -->
+                <div class="menu-section">
+                    <h3>COLD COFFEE</h3>
+                    <p class="note">Normal / Iced</p>
+                    <table>
+                        <tr>
+                            <td>Cold coffee</td>
+                            <td class="price">580/480</td>
+                        </tr>
+                        <tr>
+                            <td>Caramel</td>
+                            <td class="price">650/500</td>
+                        </tr>
+                        <tr>
+                            <td>Vanilla</td>
+                            <td class="price">650/490</td>
+                        </tr>
+                        <tr>
+                            <td>Hazelnut</td>
+                            <td class="price">650/520</td>
+                        </tr>
+                        <tr>
+                            <td>Mocha</td>
+                            <td class="price">650/450</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                
+                <!-- Shakes Section -->
+                <div class="menu-section">
+                    <h2>SHAKES</h2>
+                    <ul class="menu-items">
+                        <li class="popular"><span>Nutella</span> <span class="price">730</span></li>
+                        <li class="popular"><span>Oreo</span> <span class="price">650</span></li>
+                        <li><span>Kitkat</span> <span class="price">600</span></li>
+                        <li><span>Snickers</span> <span class="price">750</span></li>
+                        <li><span>Vanilla</span> <span class="price">450</span></li>
+                        <li><span>Caramel</span> <span class="price">500</span></li>
+                        <li><span>Choco coco</span> <span class="price">550</span></li>
+                        <li class="popular"><span>Mystic special</span> <span class="price">800</span></li>
+                    </ul>
+                </div>
+                <br>
+                
+                <!-- Fruit Shakes Section -->
+                <div class="menu-section">
+                    <h2>FRUIT SHAKES</h2>
+                    <ul class="menu-items">
+                        <li><span>Banana</span> <span class="price">250</span></li>
+                        <li><span>Banana date</span> <span class="price">300</span></li>
+                        <li><span>Mango</span> <span class="price">400</span></li>
+                        <li><span>Peach</span> <span class="price">380</span></li>
+                        <li><span>Strawberry</span> <span class="price">390</span></li>
+                        <li><span>Apple</span> <span class="price">270</span></li>
+                        <li><span>Pineapple</span> <span class="price">380</span></li>
+                        <li><span>Banana almond</span> <span class="price">350</span></li>
+                        <li><span>Apple with nuts</span> <span class="price">550</span></li>
+                        <li><span>Banana nuts</span> <span class="price">550</span></li>
+                    </ul>
+                </div>
+                <br>
+                
+                <!-- Hot Coffee Section -->
+                <div class="menu-section">
+                    <h2>HOT COFFEE</h2>
+                    <ul class="menu-items">
+                        <li><span>Cappuccino</span> <span class="price">420</span></li>
+                        <li><span>Expresso</span> <span class="price">450</span></li>
+                        <li class="popular"><span>Latte</span> <span class="price">650</span></li>
+                        <li><span>Americano</span> <span class="price">300</span></li>
+                        <li><span>Caramel</span> <span class="price">600</span></li>
+                        <li><span>Vanilla</span> <span class="price">600</span></li>
+                        <li><span>Hazelnut</span> <span class="price">650</span></li>
+                        <li class="popular"><span>Hot chocolate</span> <span class="price">650</span></li>
+                    </ul>
+                </div>
+                <br>
+            </div>
+        </div>
+        
+        <footer>
+            <h3>THE MYSTIC CAFE</h3>
+            <p>Open daily from 11:00 AM to 11:00 PM</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Scroll progress indicator
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.querySelector(".scroll-progress").style.width = scrolled + "%";
+        };
+        
+        // Animate menu items sequentially
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuItems = document.querySelectorAll('.menu-items li');
+            
+            menuItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.05}s`;
+            });
+            
+            // Animate menu sections when they come into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.menu-section').forEach(section => {
+                section.style.opacity = 0;
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'all 0.6s ease-out';
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
